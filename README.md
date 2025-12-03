@@ -33,8 +33,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Github]()
-- Live Site URL: [Netlify]()
+- Solution URL: [Github](https://github.com/VirginiaPat/newsletter-sign-up-form.git)
+- Live Site URL: [Netlify](https://newsletter-signup-form-virgi.netlify.app/)
 
 ## My process
 
