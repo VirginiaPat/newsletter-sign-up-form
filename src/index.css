@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+@theme {
+  --color-grey: #949494;
+  --color-blue-800: #242742;
+  --color-blue-700: #36384d;
+  --color-red: #ff6155;
+  --color-gradient-orange: #ff6a3a;
+  --color-gradient-pink: #ff527b;
+  --color-fill-error: #ffe7e6;
+
+  --font-roboto: "Roboto", sans-serif;
+
+  --text-56: 3.5rem;
+  --text-40: 2.5rem;
+
+  /* breakpoint 528px */
+  --breakpoint-xs: 33rem;
+}
+
+.text-preset1-bold {
+  @apply font-roboto font-bold text-56 leading-[100%];
+}
+
+.text-preset1-mobile-bold {
+  @apply font-roboto font-bold text-40 leading-[100%];
+}
+
+.text-preset2-regular {
+  @apply font-roboto font-normal text-base leading-[150%];
+}
+.text-preset2-bold {
+  @apply font-roboto font-bold text-base leading-[150%];
+}
+
+.text-preset3-bold {
+  @apply font-roboto font-bold text-xs leading-[150%];
+}
+
+.background-button--states:focus,
+.background-button--states:active {
+  @apply bg-linear-to-r from-gradient-orange to-gradient-pink drop-shadow-lg drop-shadow-gradient-orange;
+}
+
+.background-button--states:hover {
+  @apply bg-linear-to-r from-gradient-orange to-gradient-pink;
+}
+
+.input-style--error {
+  @apply text-red border border-red bg-fill-error;
+}

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../assets/images/favicon-32x32.png"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link href="./index.css" type="text/css" rel="stylesheet" />
+    <script defer src="./script.js"></script>
+    <title>Newsletter sign-up form with success message</title>
+  </head>
+  <body class="flex flex-col items-center bg-blue-700">
+    <header>
+      <div aria-labelledby="newsletter-sign-up-form">
+        <h1 id="newsletter-sign-up-form" class="hidden">
+          Newsletter sign-up form
+        </h1>
+      </div>
+      <!-- MOBILE:img illustration (add or remove hidden when submit) -->
+      <img
+        id="modile-img-ill"
+        class="w-screen bg-white xs:hidden"
+        src="../assets/images/illustration-sign-up-mobile.svg"
+        alt=""
+      />
+    </header>
+
+    <div class="xs:fixed xs:inset-0 xs:flex xs:items-center xs:justify-center">
+      <div class="flex flex-col">
+        <main>
+          <!-- main page container (add or remove flex flex-col and hidden) -->
+          <div
+            id="main-container"
+            class="w-screen flex flex-col pt-10 bg-white xs:p-10 xs:rounded-4xl lg:flex-row lg:items-center lg:justify-center lg:gap-16 lg:p-8 lg:w-[904px]"
+          >
+            <!--TABLET image illustration -->
+            <img
+              class="hidden xs:block lg:hidden"
+              src="../assets/images/illustration-sign-up-tablet.svg"
+              alt=""
+            />
+
+            <!-- Texts and input-button container (the gap is btwn all texts and input container) -->
+            <div
+              class="flex flex-col gap-10 pl-6 pr-6 xs:pl-0 xs:pr-0 xs:pt-10 xs:gap-6 lg:gap-8 lg:pt-0"
+            >
+              <!-- texts container -->
+              <div class="flex flex-col gap-6 lg:gap-8">
+                <h1
+                  class="text-preset1-mobile-bold text-blue-800 xs:text-preset1-bold"
+                >
+                  Stay updated!
+                </h1>
+                <p class="text-preset2-regular text-blue-800">
+                  Join 60,000+ product managers receiving monthly updates on:
+                </p>
+                <ul class="space-y-2">
+                  <li class="flex items-start gap-4">
+                    <img
+                      src="../assets/images/icon-list.svg"
+                      alt=""
+                      class="w-5 h-5"
+                    />
+                    <span class="text-preset2-regular text-blue-800"
+                      >Product discovery and building what matters</span
+                    >
+                  </li>
+                  <li class="flex items-start gap-4">
+                    <img
+                      src="../assets/images/icon-list.svg"
+                      alt=""
+                      class="w-5 h-5"
+                    />
+                    <span class="text-preset2-regular text-blue-800"
+                      >Measuring to ensure updates are a success
+                    </span>
+                  </li>
+                  <li class="flex items-start gap-4">
+                    <img
+                      src="../assets/images/icon-list.svg"
+                      alt=""
+                      class="w-5 h-5"
+                    />
+                    <span class="text-preset2-regular text-blue-800"
+                      >And much more!
+                    </span>
+                  </li>
+                </ul>
+              </div>
+              <!-- input-button container -->
+              <div class="relative">
+                <form
+                  class="flex flex-col gap-6 pb-11 xs:pb-0 xs:gap-4 lg:gap-6"
+                  id="form"
+                  novalidate
+                  action=""
+                >
+                  <div>
+                    <label
+                      class="pb-2 text-preset3-bold text-blue-800"
+                      for="email"
+                      >Email address</label
+                    >
+                    <span
+                      class="hidden text-preset3-bold text-red absolute right-0 top-1"
+                      aria-live="polite"
+                      id="email-error"
+                    ></span>
+                    <input
+                      class="w-full pl-6 pr-6 pt-4 pb-4 text-preset2-regular placeholder:text-grey text-blue-800 rounded-lg border border-grey"
+                      id="email"
+                      placeholder="email@company.com"
+                      required=""
+                      type="email"
+                      value=""
+                      aria-required="true"
+                      name="email"
+                      autofocus
+                    />
+                  </div>
+
+                  <button
+                    class="cursor-pointer rounded-lg p-4 bg-blue-800 text-preset2-bold text-white background-button--states"
+                    id="btn"
+                    type="submit"
+                    aria-label="Subscribe"
+                    aria-describedby="subscribe-newsletter"
+                  >
+                    Subscribe to monthly newsletter
+                  </button>
+                </form>
+              </div>
+            </div>
+
+            <!-- DESKTOP image illustration -->
+            <img
+              class="hidden lg:block"
+              src="../assets/images/illustration-sign-up-desktop.svg"
+              alt=""
+            />
+          </div>
+
+          <!-- MAIN-PAGE-SUCCESS container (add or remove hidden and xs:hidden xs:flex)-->
+          <!-- 1:success img&texts container AND button -->
+          <div id="success-popup" class="hidden">
+            <div
+              class="xs:fixed xs:inset-0 xs:flex xs:items-center xs:justify-center"
+            >
+              <div
+                class="flex flex-col items-start gap-65.75 pl-6 pr-6 pt-37.25 pb-17.5 bg-white xs:gap-8 xs:p-16 xs:w-[504px] xs:rounded-4xl"
+              >
+                <div class="flex flex-col gap-8">
+                  <img
+                    class="w-16 h-16"
+                    src="../assets/images/icon-success.svg"
+                    alt=""
+                  />
+                  <h1
+                    class="font-roboto font-bold text-40 leading-[100%] text-blue-800 xs:text-56"
+                  >
+                    Thanks for subscribing!
+                  </h1>
+                  <p class="text-preset2-regular text-blue-800">
+                    A confirmation email has been sent to
+                    <span id="email-confirmed" class="font-bold"
+                      >ash@loremcompany.com.</span
+                    >
+                    Please open it and click the button inside to confirm your
+                    subscription
+                  </p>
+                </div>
+
+                <button
+                  id="dismiss-btn"
+                  class="w-full cursor-pointer rounded-lg p-4 bg-blue-800 text-preset2-bold text-white background-button--states"
+                  type="button"
+                  aria-label="Dismiss"
+                  aria-describedby="dismiss-message"
+                >
+                  Dismiss message
+                </button>
+              </div>
+            </div>
+          </div>
+        </main>
+        <footer>
+          <div class="text-xs text-preset2-regular text-white text-center mt-2">
+            Challenge by
+            <a
+              class="text-red"
+              href="https://www.frontendmentor.io?ref=challenge"
+              target="_blank"
+              >Frontend Mentor.</a
+            >
+            Coded by
+            <a
+              class="text-red"
+              href="https://www.frontendmentor.io/profile/VirginiaPat"
+              target="_blank"
+              >Virginia Patrika.</a
+            >
+          </div>
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>
