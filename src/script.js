@@ -85,16 +85,24 @@ dismissBtn.addEventListener("click", function () {
   hideSuccessPopup();
 });
 
-// close sucess pop-up when clicking outside but not inseide the pop-up
+// close sucess pop-up when clicking outside but not inside the pop-up content
 document.addEventListener("click", function (e) {
-  if (!successPopup.contains(e.target)) {
-    hideSuccessPopup();
+  // Check if popup is not hidden
+  if (!successPopup.classList.contains("hidden")) {
+    const popupContent = document.getElementById("popup-content");
+
+    // hide if click is outside popup content
+    if (popupContent && !popupContent.contains(e.target)) {
+      hideSuccessPopup();
+    }
   }
 });
 
 // close sucess pop-up when pressing ESC key
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") {
-    hideSuccessPopup();
+  if (!successPopup.classList.contains("hidden")) {
+    if (e.key === "Escape") {
+      hideSuccessPopup();
+    }
   }
 });
