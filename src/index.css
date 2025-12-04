@@ -38,12 +38,12 @@
 }
 
 .background-button--states:focus,
-.background-button--states:active {
+.background-button--states:hover {
   @apply bg-linear-to-r from-gradient-orange to-gradient-pink drop-shadow-lg drop-shadow-gradient-orange;
 }
 
-.background-button--states:hover {
-  @apply bg-linear-to-r from-gradient-orange to-gradient-pink;
+.background-button--states:active {
+  @apply bg-linear-to-r from-gradient-orange to-gradient-pink drop-shadow-none;
 }
 
 .input-style--error {
