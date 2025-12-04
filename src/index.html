@@ -109,7 +109,7 @@
                       >Email address</label
                     >
                     <span
-                      class="hidden text-preset3-bold text-red absolute right-0 top-1"
+                      class="sr-only text-preset3-bold text-red absolute right-0 top-1"
                       aria-live="polite"
                       id="email-error"
                     ></span>
@@ -127,9 +127,9 @@
                   </div>
 
                   <button
+                    type="submit"
                     class="cursor-pointer rounded-lg p-4 bg-blue-800 text-preset2-bold text-white background-button--states"
                     id="btn"
-                    type="submit"
                   >
                     Subscribe to monthly newsletter
                   </button>
@@ -145,9 +145,15 @@
             />
           </div>
 
-          <!-- MAIN-PAGE-SUCCESS container (add or remove hidden and xs:hidden xs:flex)-->
+          <!-- MAIN-PAGE-SUCCESS container(POP-UP) (add or remove hidden and xs:hidden xs:flex)-->
           <!-- 1:success img&texts container AND button -->
-          <div id="success-popup" class="hidden">
+          <div
+            id="success-popup"
+            class="hidden"
+            role="alert"
+            aria-live="assertive"
+            aria-hidden="true"
+          >
             <div
               class="xs:fixed xs:inset-0 xs:flex xs:items-center xs:justify-center"
             >
@@ -178,7 +184,7 @@
                 <button
                   id="dismiss-btn"
                   class="w-full cursor-pointer rounded-lg p-4 bg-blue-800 text-preset2-bold text-white background-button--states"
-                  type="button"
+                  type="submit"
                   aria-label="Dismiss"
                 >
                   Dismiss message
