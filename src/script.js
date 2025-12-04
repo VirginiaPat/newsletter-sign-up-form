@@ -3,7 +3,7 @@
 const form = document.getElementById("form");
 const emailInput = document.getElementById("email");
 const errorMessage = document.getElementById("email-error");
-const imgMobile = document.getElementById("modile-img-ill");
+const imgMobile = document.getElementById("mobile-img-ill");
 const mainContainer = document.getElementById("main-container");
 const successPopup = document.getElementById("success-popup");
 const dismissBtn = document.getElementById("dismiss-btn");
@@ -26,7 +26,7 @@ const showError = function () {
 // Show pop-up function
 const showSuccessPopup = function () {
   imgMobile.classList.add("hidden");
-  mainContainer.classList.remove("flex,flex-col");
+  mainContainer.classList.remove("flex", "flex-col");
   mainContainer.classList.add("hidden");
   emailInput.classList.remove("input-style--error");
 
@@ -46,12 +46,12 @@ const hideSuccessPopup = function () {
   successPopup.setAttribute("aria-hidden", "true");
   imgMobile.classList.remove("hidden");
   mainContainer.classList.remove("hidden");
-  mainContainer.classList.add("flex,flex-col");
+  mainContainer.classList.add("flex", "flex-col");
 };
 
 // Event listeners
 // check input's valid
-emailInput.addEventListener("input", function (e) {
+emailInput.addEventListener("input", function () {
   // if email valid
   if (emailInput.validity.valid) {
     errorMessage.classList.add("sr-only"); // Hide visually but keep accessible
@@ -82,9 +82,11 @@ dismissBtn.addEventListener("click", function () {
   hideSuccessPopup();
 });
 
-// close sucess pop-up when clicking outside
+// close sucess pop-up when clicking outside but not inseide the pop-up
 document.addEventListener("click", function (e) {
-  hideSuccessPopup();
+  if (!successPopup.contains(e.target)) {
+    hideSuccessPopup();
+  }
 });
 
 // close sucess pop-up when pressing ESC key
