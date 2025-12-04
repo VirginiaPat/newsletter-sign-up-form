@@ -16,10 +16,12 @@ const showError = function () {
   if (emailInput.validity.valueMissing) {
     // If empty
     errorMessage.textContent = "You need to enter an email address.";
+    emailInput.classList.remove("input-style--error");
   } else if (emailInput.validity.typeMismatch || !emailInput.validity.valid) {
     // If it's not an email address
     errorMessage.textContent = "Valid email required";
     emailInput.setAttribute("aria-invalid", "true");
+    emailInput.classList.add("input-style--error");
   }
   errorMessage.classList.remove("sr-only");
 };
@@ -72,7 +74,6 @@ form.addEventListener("submit", function (e) {
   // if the email field is invalid
   if (!emailInput.validity.valid) {
     showError();
-    emailInput.classList.add("input-style--error");
   } else {
     showSuccessPopup();
   }
