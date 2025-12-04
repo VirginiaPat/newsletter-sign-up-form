@@ -115,13 +115,15 @@
                     ></span>
                     <input
                       class="w-full pl-6 pr-6 pt-4 pb-4 text-preset2-regular placeholder:text-grey text-blue-800 rounded-lg border border-grey"
+                      type="email"
                       id="email"
                       placeholder="email@company.com"
                       required=""
-                      type="email"
                       value=""
                       aria-required="true"
                       name="email"
+                      aria-describedby="email-error"
+                      aria-invalid="false"
                       autofocus
                     />
                   </div>
@@ -182,10 +184,9 @@
                 </div>
 
                 <button
+                  type="button"
                   id="dismiss-btn"
                   class="w-full cursor-pointer rounded-lg p-4 bg-blue-800 text-preset2-bold text-white background-button--states"
-                  type="submit"
-                  aria-label="Dismiss"
                 >
                   Dismiss message
                 </button>

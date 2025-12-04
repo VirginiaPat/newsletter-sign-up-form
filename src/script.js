@@ -18,6 +18,7 @@ const showError = function () {
   } else if (emailInput.validity.typeMismatch || !emailInput.validity.valid) {
     // If it's not an email address
     errorMessage.textContent = "Valid email required";
+    emailInput.setAttribute("aria-invalid", "true");
   }
   errorMessage.classList.remove("sr-only");
 };
@@ -32,6 +33,7 @@ const showSuccessPopup = function () {
   // show success pop-up
   successPopup.classList.remove("hidden");
   successPopup.setAttribute("aria-hidden", "false");
+  emailInput.setAttribute("aria-invalid", "false");
   emailConfirmed.textContent = emailInput.value; //add the email from the input into the pop-up text
 
   // clear input field
