@@ -8,6 +8,7 @@ const mainContainer = document.getElementById("main-container");
 const successPopup = document.getElementById("success-popup");
 const dismissBtn = document.getElementById("dismiss-btn");
 const emailConfirmed = document.getElementById("email-confirmed");
+const popupContent = document.getElementById("popup-content");
 
 // Functions
 // Show error text message
@@ -72,10 +73,7 @@ form.addEventListener("submit", function (e) {
   if (!emailInput.validity.valid) {
     showError();
     emailInput.classList.add("input-style--error");
-  }
-
-  // if the email field is valid
-  if (emailInput.validity.valid) {
+  } else {
     showSuccessPopup();
   }
 });
@@ -85,12 +83,15 @@ dismissBtn.addEventListener("click", function () {
   hideSuccessPopup();
 });
 
+// Stop clicks inside popup from bubbling up and closing it accidentally
+popupContent.addEventListener("click", function (e) {
+  e.stopPropagation();
+});
+
 // close sucess pop-up when clicking outside but not inside the pop-up content
 document.addEventListener("click", function (e) {
   // Check if popup is not hidden
   if (!successPopup.classList.contains("hidden")) {
-    const popupContent = document.getElementById("popup-content");
-
     // hide if click is outside popup content
     if (popupContent && !popupContent.contains(e.target)) {
       hideSuccessPopup();
