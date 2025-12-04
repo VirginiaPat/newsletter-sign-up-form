@@ -36,6 +36,9 @@ const showSuccessPopup = function () {
   emailInput.setAttribute("aria-invalid", "false");
   emailConfirmed.textContent = emailInput.value; //add the email from the input into the pop-up text
 
+  // Move keyboard focus to the success pop-up container
+  successPopup.focus();
+
   // clear input field
   emailInput.value = "";
 };
