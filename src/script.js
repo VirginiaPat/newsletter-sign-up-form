@@ -16,14 +16,13 @@ const showError = function () {
   if (emailInput.validity.valueMissing) {
     // If empty
     errorMessage.textContent = "You need to enter an email address.";
-    emailInput.classList.remove("input-style--error");
   } else if (emailInput.validity.typeMismatch || !emailInput.validity.valid) {
     // If it's not an email address
     errorMessage.textContent = "Valid email required";
     emailInput.setAttribute("aria-invalid", "true");
-    emailInput.classList.add("input-style--error");
   }
   errorMessage.classList.remove("sr-only");
+  emailInput.classList.add("input-style--error");
 };
 
 // Show pop-up function
@@ -31,6 +30,7 @@ const showSuccessPopup = function () {
   imgMobile.classList.add("hidden");
   mainContainer.classList.remove("flex", "flex-col");
   mainContainer.classList.add("hidden");
+  errorMessage.classList.add("sr-only"); // Hide visually but keep accessible
   emailInput.classList.remove("input-style--error");
 
   // show success pop-up
@@ -56,14 +56,15 @@ const hideSuccessPopup = function () {
 };
 
 // Event listeners
-// check input's valid
+// Remove red background and error text when re-writing input
 emailInput.addEventListener("input", function () {
-  // if email valid
-  if (emailInput.validity.valid) {
-    errorMessage.classList.add("sr-only"); // Hide visually but keep accessible
-    emailInput.classList.remove("input-style--error"); //remove red background when it exists
-  } else {
-    showError();
+  // if input is empty but containes error message and bg
+  if (
+    emailInput.validity.valueMissing &&
+    emailInput.classList.contains("input-style--error")
+  ) {
+    emailInput.classList.remove("input-style--error");
+    errorMessage.textContent = "";
   }
 });
 
