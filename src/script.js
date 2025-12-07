@@ -1,6 +1,7 @@
 "use strict";
 
 const form = document.getElementById("form");
+
 const emailInput = document.getElementById("email");
 const errorMessage = document.getElementById("email-error");
 const imgMobile = document.getElementById("mobile-img-ill");
@@ -10,13 +11,19 @@ const dismissBtn = document.getElementById("dismiss-btn");
 const emailConfirmed = document.getElementById("email-confirmed");
 const popupContent = document.getElementById("popup-content");
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 // Functions
+const validateEmail = function (email) {
+  return EMAIL_REGEX.test(email);
+};
+
 // Show error text message
 const showError = function () {
+  // If empty
   if (emailInput.validity.valueMissing) {
-    // If empty
     errorMessage.textContent = "You need to enter an email address.";
-  } else if (emailInput.validity.typeMismatch || !emailInput.validity.valid) {
+  } else if (!validateEmail(emailInput.value)) {
     // If it's not an email address
     errorMessage.textContent = "Valid email required";
     emailInput.setAttribute("aria-invalid", "true");
@@ -24,6 +31,48 @@ const showError = function () {
   errorMessage.classList.remove("sr-only");
   emailInput.classList.add("input-style--error");
 };
+
+// Focus trap utility with proper cleanup
+const createFocusTrap = function (element) {
+  const focusableElements = element.querySelectorAll(
+    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+  );
+
+  if (focusableElements.length === 0) {
+    console.warn("No focusable elements found in", element);
+    return null;
+  }
+
+  const firstElement = focusableElements[0];
+  const lastElement = focusableElements[focusableElements.length - 1]; //in the success popup we only have one element so basically first and last element is the same
+
+  const handleKeyDown = function (e) {
+    if (e.key !== "Tab") return;
+
+    if (e.shiftKey) {
+      // Going backwards
+      if (document.activeElement === firstElement) {
+        lastElement.focus();
+        e.preventDefault();
+      }
+    } else {
+      // Going forwards
+      if (document.activeElement === lastElement) {
+        firstElement.focus();
+        e.preventDefault();
+      }
+    }
+  };
+
+  element.addEventListener("keydown", handleKeyDown);
+
+  // Return cleanup function
+  return () => {
+    element.removeEventListener("keydown", handleKeyDown);
+  };
+};
+
+let removeFocusTrap = null;
 
 // Show pop-up function
 const showSuccessPopup = function () {
@@ -39,8 +88,16 @@ const showSuccessPopup = function () {
   emailInput.setAttribute("aria-invalid", "false");
   emailConfirmed.textContent = emailInput.value; //add the email from the input into the pop-up text
 
-  // Move keyboard focus to the success pop-up container
-  successPopup.focus();
+  // Focus first focusable element
+  const focusableElements = successPopup.querySelectorAll(
+    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+  );
+  if (focusableElements[0]) {
+    focusableElements[0].focus();
+  }
+
+  //Setup focus trap
+  removeFocusTrap = createFocusTrap(successPopup);
 
   // clear input field
   emailInput.value = "";
@@ -53,6 +110,15 @@ const hideSuccessPopup = function () {
   imgMobile.classList.remove("hidden");
   mainContainer.classList.remove("hidden");
   mainContainer.classList.add("flex", "flex-col");
+
+  // Remove focus trap
+  if (removeFocusTrap) {
+    removeFocusTrap();
+    removeFocusTrap = null;
+  }
+
+  // Return focus to email input
+  emailInput.focus();
 };
 
 // Event listeners
@@ -81,9 +147,7 @@ form.addEventListener("submit", function (e) {
 });
 
 // close success pop-up when pressing dismiss button
-dismissBtn.addEventListener("click", function () {
-  hideSuccessPopup();
-});
+dismissBtn.addEventListener("click", hideSuccessPopup);
 
 // Stop clicks inside popup from bubbling up and closing it accidentally
 popupContent.addEventListener("click", function (e) {
@@ -102,7 +166,7 @@ document.addEventListener("click", function (e) {
 });
 
 // close sucess pop-up when pressing ESC key
-document.addEventListener("keydown", (e) => {
+document.addEventListener("keydown", function (e) {
   if (!successPopup.classList.contains("hidden")) {
     if (e.key === "Escape") {
       hideSuccessPopup();
